@@ -1,0 +1,90 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">首页</h1>
+                    <small class="text-muted">{{sysuser.name}}, 欢迎访问{{app.name}}</small>
+                </div>
+            </div>
+        </div>
+        <!-- / main header -->
+        <div class="wrapper-md">
+            <!-- stats -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row row-sm text-center">
+                        <div class="col-xs-6">
+                            <div class="panel padder-v item">
+                                <div class="text-info font-thin h1">&nbsp;78</div>
+                                <span class="text-muted text-xs">待处理问题</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel padder-v bg-primary item">
+                                <div class="text-white font-thin h1">&nbsp;86</div>
+                                <span class="text-muted text-xs">待审核认证</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel padder-v bg-info item">
+                                <div class="text-white font-thin h1">&nbsp;10022</div>
+                                <span class="text-muted text-xs">用户总数</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel padder-v item">
+                                <div class="font-thin h1">&nbsp;￥1239234.20</div>
+                                <span class="text-muted text-xs">总收入</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 m-b-md">
+                            <div class="r bg-light dker item hbox no-border">
+                                <div class="col w-xs v-middle">
+                                    <div id="consumePie" class="sparkline inline"></div>
+                                </div>
+                                <div class="col dk padder-v r-r">
+                                    <div class="text-primary-dk font-thin h1"><span>&nbsp;￥1232323.12</span>
+                                    </div>
+                                    <span class="text-muted text-xs">总消费</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">每日注册用户</div>
+                        <div class="panel-body">
+                            <div id="lastUser" style="height:238px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">最近消费</div>
+                        <div class="panel-body">
+                            <div id="lastConsume" style="height:240px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">每日充值</div>
+                        <div class="panel-body">
+                            <div id="lastRevenue" style="height:240px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+
+    </div>
+    <!-- / main -->
+</div>

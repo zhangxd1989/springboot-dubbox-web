@@ -1,0 +1,62 @@
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active" ng-bind="title"></li>
+        <button class="btn btn-sm btn-icon btn-default pull-right" ng-click="$state.reload()"><i
+                class="icon icon-refresh"></i></button>
+    </ul>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="row wrapper">
+            <div class="col-sm-10 m-b-xs">
+                <form class="form-inline" role="form">
+                    <div class="form-group m-r-xs">
+                        <input class="form-control input-sm" placeholder="名称" ng-model="params.name">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" placeholder="描述" ng-model="params.remarks">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-default" ng-click="search()">搜索</button>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <button ui-sref="app.sys.role.form" class="btn btn-sm btn-default pull-right m-r-md"
+                        ng-if="hasAuthority('sys:role:edit')">新建
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-condensed text-nowrap">
+                <thead>
+                <tr class="b-t b-light">
+                    <th ui-order-column="a.name">名称</th>
+                    <th>描述</th>
+                    <th class="text-center">可用</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in pageInfo.list">
+                    <td>{{item.name}}</td>
+                    <td>{{item.remarks}}</td>
+                    <td class="text-center">
+                        {{item.enabled | dict: 'YES_NO' }}
+                    </td>
+                    <td>
+                        <button ui-sref="app.sys.role.form({id: item.id})" class="btn btn-default btn-sm">详情</button>
+                        <button ng-click="delete(item.id)" class="btn btn-default btn-sm"
+                                ng-if="hasAuthority('sys:user:edit')">删除
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 底部分页 -->
+        <span data-ng-include=" 'tpl/blocks/pagination.html' "></span>
+    </div>
+</div>

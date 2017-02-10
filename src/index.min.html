@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="utf-8"/>
+    <title>环球旅行管理平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="icon" href="img/favicon.png"/>
+    <link rel="stylesheet" href="css/app.min.css" type="text/css"/>
+
+    <script type="text/javascript">
+        window.bughd = window.bughd || function(){};
+        bughd("create",{key:"46d5eb9556d8e8421b6d3479ef92e2fd"})
+    </script>
+</head>
+<body ng-controller="AppCtrl">
+<div class="app" id="app"
+     ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}"
+     ui-view></div>
+
+<script src="vendor/vendor.min.js"></script>
+
+<script src="js/app.min.js"></script>
+</body>
+</html>

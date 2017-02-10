@@ -1,0 +1,89 @@
+<script type="text/ng-template" id="tree-dnd-template-render.html">
+    <table ng-class="$tree_class">
+        <thead>
+        <tr>
+            <th ng-class="expandingProperty.titleClass" ng-style="expandingProperty.titleStyle"
+
+                compile="expandingProperty.titleTemplate">
+                {{expandingProperty.displayName || expandingProperty.field || expandingProperty}}
+            </th>
+            <th ng-repeat="col in colDefinitions" ng-class="col.titleClass" ng-style="col.titleStyle"
+                compile="col.titleTemplate">
+                {{col.displayName || col.field}}
+            </th>
+        </tr>
+        </thead>
+        <tbody tree-dnd-nodes>
+        <tr tree-dnd-node="node" ng-repeat="node in tree_nodes track by node.__hashKey__ "
+            ng-show="enabledFilter ? node.__filtered_visible__ === true && node.__visible__ : node.__visible__"
+            ng-class="enabledFilter ? (node.__filtered__ === true? 'success': '') : (node.__selected__ ? ' active':'')"
+            ng-click="onSelect(node)">
+            <td tree-dnd-node-handle
+                ng-style="expandingProperty.cellStyle ? expandingProperty.cellStyle : {'padding-left': $callbacks.calsIndent(node.__level__)}"
+                ng-class="expandingProperty.cellClass" compile="expandingProperty.cellTemplate">
+                <a data-nodrag> <i ng-class="$icon_class"
+                                   ng-click="toggleExpand(node)"
+                                   class="tree-icon"></i>
+                </a> <i ng-class="node.icon" class="m-r-sm"></i>{{node[expandingProperty.field] ||
+                node[expandingProperty]}}
+            </td>
+            <td ng-repeat="col in colDefinitions" ng-class="col.cellClass" ng-style="col.cellStyle"
+                compile="col.cellTemplate">
+                {{node[col.field]}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active" ng-bind="title"></li>
+        <button class="btn btn-sm btn-icon btn-default pull-right" ng-click="$state.reload()"><i
+                class="icon icon-refresh"></i></button>
+    </ul>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="row wrapper">
+            <div class="col-sm-7 m-b-xs">
+                <form class="form-inline" role="form">
+                    <div class="form-group m-r-xs">
+                        <input class="form-control input-sm" placeholder="名称" ng-model="filter.name">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-5">
+                <button class="btn btn-sm btn-default pull-right  m-r-md" ng-click="my_tree.collapse_all()">折叠全部
+                </button>
+                <button class="btn btn-sm btn-default pull-right m-l-xs m-r-xs" ng-click="my_tree.expand_all()">展开全部
+                </button>
+                <button ui-sref="app.sys.menu.form" class="btn btn-sm btn-default pull-right"
+                        ng-if="hasAuthority('sys:menu:edit')">新建菜单
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <tree-dnd
+                    tree-class="tree-dnd table table-striped table-bordered table-condensed text-nowrap"
+                    tree-data="tree_data"
+                    tree-control="my_tree"
+
+                    filter="filter"
+                    template-url="tree-dnd-template-render.html"
+
+                    icon-leaf="fa fa-fw"
+                    icon-collapse="fa fa-fw fa-angle-right"
+                    icon-expand="fa fa-fw fa-angle-down"
+                    primary-key="id"
+                    column-defs="col_defs"
+                    expand-on="expanding_property"
+                    expand-level="2"
+            ></tree-dnd>
+        </div>
+
+    </div>
+</div>

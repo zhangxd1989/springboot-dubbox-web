@@ -1,0 +1,37 @@
+<div class='loading' ng-if="loading">
+    <div class='load'>正在登录...</div>
+</div>
+<div class="container w-xxl w-auto-xs" ng-controller="LoginCtrl" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t">{{app.name}}</a>
+    <div class="m-b-lg">
+        <div class="line line-dashed"></div>
+        <form name="form" class="form-validation">
+            <div class="text-danger wrapper text-center" ng-show="authError">
+                {{authError}}
+            </div>
+            <div class="list-group list-group-sm">
+                <div class="list-group-item">
+                    <input placeholder="用户名" class="form-control no-border" ng-model="user.username"
+                           ui-focus="usernameFocus" required>
+                </div>
+                <div class="list-group-item">
+                    <input type="password" placeholder="密码" class="form-control no-border"
+                           ng-model="user.password" required>
+                </div>
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="rememberPwd"><i></i> 记住密码（公共环境慎用）
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
+                    data-style="expand-left" data-spinner-size="30" data-spinner-color="#fff" ng-disabled='form.$invalid'>登录
+            </button>
+        </form>
+    </div>
+    <div class="text-center">
+        <p>
+            <small class="text-muted">环球旅行 &copy; 2016</small>
+        </p>
+    </div>
+</div>

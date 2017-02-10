@@ -1,0 +1,86 @@
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a ui-sref="app.sys.menu.list">菜单管理</a></li>
+        <li class="active" ng-bind="title"></li>
+        <button class="btn btn-sm btn-icon btn-default pull-right" ng-click="$state.reload()"><i
+                class="icon icon-refresh"></i></button>
+    </ul>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="form" class="form-horizontal form-validation">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="menu.name" class="form-control w-md" ng-maxlength="100" required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">链接</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="menu.href" class="form-control w-md" ng-maxlength="2000">
+                        <span class="help-block m-b-none">点击菜单跳转的页面</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">图标</label>
+                    <div class="col-sm-10">
+                        <div class="input-group w-xl w-auto-xs">
+                            <input type="text" ng-model="menu.icon" class="form-control" ng-maxlength="100">
+                            <span class="input-group-addon"><i ng-class="menu.icon"></i>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>排序</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="menu.sort" class="form-control w-xxs"
+                               ui-validate="{ a:'$value >= 0', b:'$value <= 9999' }" required>
+                        <span class="help-block m-b-none">排列顺序，升序。</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>可见</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline" ng-repeat="item in yes_no">
+                            <input type="radio" name="show" ng-model="menu.show" ng-value="item.key"> {{item.value}}
+                        </label>
+                        <span class="help-block m-b-none">该菜单或操作是否显示到系统菜单中</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限标识</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="menu.permission" class="form-control w-md" ng-maxlength="200">
+                        <span class="help-block m-b-none">控制器中定义的权限标识，如：@PreAuthorize("hasAuthority('权限标识')")</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="menu.remarks" rows="6" class="form-control" ng-maxlength="255"></textarea>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="button" class="btn btn-default" ng-disabled="form.$invalid"
+                                ng-if="hasAuthority('sys:menu:edit')" ng-click="saveData()">
+                            保存
+                        </button>
+                        <a class="btn btn-primary" ui-sref="app.sys.menu.list">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

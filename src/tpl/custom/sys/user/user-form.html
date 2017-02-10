@@ -1,0 +1,109 @@
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a ui-sref="app.sys.user.list">用户管理</a></li>
+        <li class="active" ng-bind="title"></li>
+        <button class="btn btn-sm btn-icon btn-default pull-right" ng-click="$state.reload()"><i
+                class="icon icon-refresh"></i></button>
+    </ul>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="form" class="form-horizontal form-validation">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.name" class="form-control w-md" ng-maxlength="100" required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>登录名</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.loginName" class="form-control w-md" ng-maxlength="100"
+                               required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm" ng-if="!user.id">*</span>密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" ng-model="user.password" class="form-control w-md"
+                               ng-maxlength="50" ng-required="!user.id">
+                        <span class="help-block m-b-none">若不修改密码，请留空。</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" ng-model="user.confirm_password" name="confirm_password"
+                               ui-validate=" '$value==user.password' " ui-validate-watch=" 'user.password' "
+                               class="form-control w-md">
+                        <span class="help-block m-b-none" ng-show='form.confirm_password.$error.validator'>密码不匹配</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="email" ng-model="user.email" class="form-control w-md" ng-maxlength="200">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.phone" class="form-control w-md" ng-maxlength="200">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">手机</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.mobile" class="form-control w-md" ng-maxlength="200">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>允许登录</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline" ng-repeat="item in yes_no">
+                            <input type="radio" name="enabled" ng-model="user.enabled" ng-value="item.key"> {{item.value}}
+                        </label>
+                        <span class="help-block m-b-none">“是”代表此账号允许登录，“否”则表示此账号不允许登录</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户角色</label>
+                    <div class="col-sm-10">
+                        <label class="checkbox-inline" ng-repeat="role in roles">
+                            <input type="checkbox" ng-value="role.id" ng-model="role.checked"
+                                   ng-change="selectedRoles()"> {{role.remarks}}
+                        </label>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="user.remarks" rows="6" class="form-control" ng-maxlength="255"></textarea>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="button" class="btn btn-default" ng-disabled="form.$invalid"
+                                ng-if="hasAuthority('sys:user:edit')" ng-click="saveData()">
+                            保存
+                        </button>
+                        <a class="btn btn-primary" ui-sref="app.sys.user.list">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

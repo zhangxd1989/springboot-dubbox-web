@@ -1,0 +1,15 @@
+<footer class="panel-footer">
+    <div class="row">
+        <div class="col-sm-6 text-left text-center-xs">
+            <small class="text-muted inline m-t-none m-b-none">
+                当前 {{pageInfo.pageNum}}/{{pageInfo.pages}} 页，共 {{pageInfo.total}} 条
+            </small>
+        </div>
+        <div class="col-sm-6 text-right text-center-xs">
+            <uib-pagination boundary-links="true" total-items="pageInfo.total" ng-model="pageInfo.pageNum"
+                        items-per-page="pageInfo.pageSize" max-size="5" rotate="false"
+                        class="pagination-sm m-t-none m-b-none" previous-text="&lsaquo;" next-text="&rsaquo;"
+                        first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()"></uib-pagination>
+        </div>
+    </div>
+</footer>

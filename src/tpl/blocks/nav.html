@@ -1,0 +1,29 @@
+<!-- list -->
+<ul class="nav">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span>导航</span>
+    </li>
+    <li ng-repeat="item in menu | orderBy:'sort'" ui-sref-active="active">
+        <a ng-if="!item.leaf" href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i ng-class="item.icon"></i>
+            <span>{{item.name}}</span>
+        </a>
+        <ul ng-if="!item.leaf" class="nav nav-sub dk">
+            <li ng-repeat="child in item.children | orderBy:'sort'" ui-sref-active="active">
+                <a ui-sref="{{child.href}}">
+                    <i class="{{child.icon}}"></i>
+                    <span>{{child.name}}</span>
+                </a>
+            </li>
+        </ul>
+        <a ng-if="item.leaf" ui-sref="{{item.href}}">
+            <i class="{{item.icon}}"></i>
+            <span>{{item.name}}</span>
+        </a>
+    </li>
+</ul>
+<!-- / list -->
